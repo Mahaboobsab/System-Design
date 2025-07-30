@@ -163,6 +163,87 @@ class DownloadManager: NSObject, URLSessionDownloadDelegate {
 }
 
 ```
+
+```swift
+import Foundation
+
+struct DownloadItem: Identifiable {
+    let id = UUID()
+    let url: URL
+    var progress: Float = 0.0
+    var isDownloading: Bool = false
+    var isCompleted: Bool = false
+}
+```
+```swift
+import Foundation
+import Combine
+
+class DownloadViewModel: ObservableObject {
+    @Published var items: [DownloadItem] = []
+
+    func addDownload(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        let item = DownloadItem(url: url)
+        items.append(item)
+        DownloadManager.shared.startDownload(from: url)
+    }
+}
+```
+
+```swift
+import SwiftUI
+
+struct DownloadListView: View {
+    @StateObject private var viewModel = DownloadViewModel()
+    @State private var newURL: String = ""
+
+    var body: some View {
+        NavigationView {
+            VStack {
+                HStack {
+                    TextField("Enter file URL", text: $newURL)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    Button("Download") {
+                        viewModel.addDownload(urlString: newURL)
+                        newURL = ""
+                    }
+                }.padding()
+
+                List(viewModel.items) { item in
+                    VStack(alignment: .leading) {
+                        Text(item.url.lastPathComponent)
+                        ProgressView(value: item.progress)
+                            .progressViewStyle(LinearProgressViewStyle())
+                    }
+                }
+            }
+            .navigationTitle("File Downloader")
+        }
+    }
+}
+```
+
+```swift
+import SwiftUI
+
+@main
+struct FileDownloaderApp: App {
+    var body: some Scene {
+        WindowGroup {
+            DownloadListView()
+        }
+    }
+}
+```
+```swift
+<key>UIBackgroundModes</key>
+<array>
+    <string>fetch</string>
+    <string>remote-notification</string>
+    <string>background-fetch</string>
+</array>
+```
 **✅ When to Write Only DownloadManager**  
 
 **You can focus just on DownloadManager if:**  
