@@ -78,6 +78,14 @@
 - **Storage limits**: Warn user if disk space is low  
 - **Concurrency**: Limit to 3–5 parallel downloads to avoid overload"
 
+**✅ Step 7: Security & Privacy**  
+**You**:  
+**"If files are sensitive:**  
+
+- Use AES encryption for local storage  
+- Store keys securely in Keychain  
+- Respect user privacy and avoid tracking"  
+
 
 
   
