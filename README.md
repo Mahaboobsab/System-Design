@@ -1,12 +1,13 @@
 # System-Design
 🎯 System Design Interview: File Downloader App (Mobile)  
 
+---
+
 **✅ Step 1: Clarify Requirements**  
 
 **Interviewer**:  
 
 **"Design a mobile app that downloads files. What are the core features you'd consider?"**  
-
 
 **You**:
 **"Let me clarify a few things first:**  
@@ -16,13 +17,12 @@
 - Do we need background download support?  
 - Is there a limit on file size or number of concurrent downloads?  
 - Should we support offline access and caching?"  
-
+---
 **✅ Step 2: Define Functional Requirements**  
 
 **You**:  
 
 **"Based on typical use cases, here are the functional requirements:**  
-
 
 - Download files from a given URL
 - Show download progress
@@ -30,6 +30,7 @@
 - Store files locally for offline access
 - Retry failed downloads
 - Notify user on completion
+---  
 
 **✅ Step 3: Define Non-Functional Requirements**  
 
@@ -41,6 +42,7 @@
 - Background download support  
 - Minimal impact on battery and performance  
 - Support for iOS 13+ for broader device compatibility
+--- 
 
 **✅ Step 4: High-Level Architecture**  
 
@@ -53,6 +55,7 @@
 - **Networking**: URLSessionDownloadTask with background configuration  
 - **Persistence**: Core Data or SQLite to track download metadata  
 - **Notification System**: Local notifications for completion alerts
+--- 
 
 **✅ Step 5: Component Design**  
 
@@ -67,6 +70,7 @@
 - Each task tracks URL, progress, status, and local file path  
 - Implements delegate methods to handle completion and errors  
 - Stores resume data for interrupted downloads"
+--- 
 
 **✅ Step 6: Edge Cases & Trade-offs**  
 
@@ -77,6 +81,7 @@
 - **App termination**: Use resume data to continue downloads  
 - **Storage limits**: Warn user if disk space is low  
 - **Concurrency**: Limit to 3–5 parallel downloads to avoid overload"
+--- 
 
 **✅ Step 7: Security & Privacy**  
 
@@ -86,6 +91,7 @@
 - Use AES encryption for local storage  
 - Store keys securely in Keychain  
 - Respect user privacy and avoid tracking"
+--- 
 
 **✅ Step 8: Monitoring & Analytics**  
 
@@ -95,6 +101,7 @@
 
 ![IMG_20250730_222821](https://github.com/user-attachments/assets/2c3bb8d4-c027-4c31-9cd6-e94c7a08653f)
 
+---  
 
 **📦 Swift Code Template: DownloadManager**  
 ```swift
