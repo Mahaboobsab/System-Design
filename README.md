@@ -79,12 +79,20 @@
 - **Concurrency**: Limit to 3–5 parallel downloads to avoid overload"
 
 **✅ Step 7: Security & Privacy**  
+
 **You**:  
 **"If files are sensitive:**  
 
 - Use AES encryption for local storage  
 - Store keys securely in Keychain  
-- Respect user privacy and avoid tracking"  
+- Respect user privacy and avoid tracking"
+
+**✅ Step 8: Monitoring & Analytics**  
+
+**You**:  
+-   "I’d log download events (start, complete, fail) for analytics.  
+-    Use tools like Firebase or custom logging to monitor performance and errors."
+
 
 
 
