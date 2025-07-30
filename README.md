@@ -244,6 +244,72 @@ struct FileDownloaderApp: App {
     <string>background-fetch</string>
 </array>
 ```
+### Why Use Singleton for DownloadManager in iOS
+
+The `DownloadManager` in iOS is commonly implemented as a singleton to ensure centralized control and efficient resource management. Below are the key reasons and considerations for using a singleton pattern in this context.
+
+---
+
+#### ✅ Centralized Download Control
+
+- A singleton ensures that all downloads are managed from a single, shared instance.
+- Prevents multiple instances from creating conflicting or duplicate download tasks.
+- Simplifies coordination across different parts of the app.
+
+---
+
+#### 🔄 Background Session Reuse
+
+- `URLSession` with a background configuration must be created once and reused.
+- Apple recommends maintaining a single session for background downloads to ensure proper handling when the app is suspended or terminated.
+- Singleton helps maintain the lifecycle of the session across app states.
+
+---
+
+#### 🔗 Shared State Across Views
+
+- Multiple views (e.g., download list, detail view) can access the same manager instance.
+- Enables consistent tracking of download progress and status.
+- Simplifies UI updates and state management.
+
+---
+
+#### 🧠 Memory Efficiency
+
+- Avoids creating multiple `URLSession` instances, which can be resource-intensive.
+- Keeps active downloads in memory without duplication.
+- Reduces overhead and improves performance.
+
+---
+
+#### 🎯 Interview Best Practices
+
+- Demonstrates understanding of global coordination and resource management.
+- Singleton is a common pattern for managers like:
+  - `LocationManager`
+  - `NotificationCenter`
+  - `DownloadManager`
+- Shows awareness of system-level design considerations.
+
+---
+
+#### ⚠️ When Not to Use Singleton
+
+- When multiple isolated download contexts are needed (e.g., per user profile).
+- In architectures that favor testability and dependency injection.
+- When using protocols and mock implementations for unit testing.
+
+---
+
+#### ✅ Alternative Approach
+
+- Use protocols and dependency injection to make `DownloadManager` testable.
+- Create instances as needed and inject them into view models or services.
+
+---
+
+**Conclusion**: Singleton is a practical and efficient choice for `DownloadManager` in many iOS apps, especially when centralized control and background session reuse are required. However, developers should evaluate the architecture and testing needs before committing to this pattern.
+
 **✅ When to Write Only DownloadManager**  
 
 **You can focus just on DownloadManager if:**  
