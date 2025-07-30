@@ -93,6 +93,9 @@
 -   "I’d log download events (start, complete, fail) for analytics.  
 -    Use tools like Firebase or custom logging to monitor performance and errors."
 
+![IMG_20250730_222821](https://github.com/user-attachments/assets/2c3bb8d4-c027-4c31-9cd6-e94c7a08653f)
+
+
 **📦 Swift Code Template: DownloadManager**  
 ```swift
 import Foundation
