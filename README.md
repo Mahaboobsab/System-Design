@@ -40,7 +40,21 @@
 - Secure file storage (e.g., sandboxed, encrypted if needed)  
 - Background download support  
 - Minimal impact on battery and performance  
-- Support for iOS 13+ for broader device compatibility  
+- Support for iOS 13+ for broader device compatibility
+
+**✅ Step 4: High-Level Architecture**  
+
+**You**:  
+**"I’d use the following components:**  
+
+- **UI Layer**: SwiftUI or UIKit for download list and progress  
+- **Download Manager**: Handles queueing, progress, pause/resume  
+- **File Storage**: Uses FileManager to save files in app sandbox  
+- **Networking**: URLSessionDownloadTask with background configuration  
+- **Persistence**: Core Data or SQLite to track download metadata  
+- **Notification System**: Local notifications for completion alerts
+
+
 
   
 
