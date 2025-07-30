@@ -103,6 +103,36 @@
 
 ---  
 
+**✅ Step 9: Extensibility & Future Scope**  
+
+**You**:  
+
+**"To make the app scalable and extensible, I’d plan for future enhancements like:**  
+- Support for cloud sync (e.g., iCloud, Google Drive)  
+- File previews within the app (PDF viewer, image viewer)  
+- User authentication for secure downloads  
+- Download prioritization and scheduling  
+- Integration with share sheet and external apps"  
+---  
+
+**✅ Step 10: Testing Strategy**  
+
+You:
+**"I’d ensure robustness through:**  
+
+
+- Unit tests for DownloadManager logic  
+- UI tests for progress indicators and user interactions  
+- Network mocking for offline and error scenarios  
+- Stress testing with large files and concurrent downloads"  
+---  
+
+**✅ Step 11: Interviewer Engagement**  
+
+You:
+**"Would you like me to walk through a Swift implementation of the DownloadManager class or sketch out the architecture diagram?"**  
+---
+
 **📦 Swift Code Template: DownloadManager**  
 ```swift
 import Foundation
