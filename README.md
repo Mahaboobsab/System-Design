@@ -30,6 +30,18 @@
 - Store files locally for offline access
 - Retry failed downloads
 - Notify user on completion
+
+**✅ Step 3: Define Non-Functional Requirements**  
+
+**You**:  
+**"Non-functional requirements might include:**  
+
+- Efficient memory and disk usage  
+- Secure file storage (e.g., sandboxed, encrypted if needed)  
+- Background download support  
+- Minimal impact on battery and performance  
+- Support for iOS 13+ for broader device compatibility  
+
   
 
 
