@@ -93,6 +93,73 @@
 -   "I’d log download events (start, complete, fail) for analytics.  
 -    Use tools like Firebase or custom logging to monitor performance and errors."
 
+**📦 Swift Code Template: DownloadManager**  
+```swift
+import Foundation
+
+class DownloadManager: NSObject, URLSessionDownloadDelegate {
+    static let shared = DownloadManager()
+
+    private var session: URLSession!
+    private var activeDownloads: [URL: URLSessionDownloadTask] = [:]
+
+    override init() {
+        super.init()
+        let config = URLSessionConfiguration.background(withIdentifier: "com.yourapp.download")
+        config.isDiscretionary = true
+        config.sessionSendsLaunchEvents = true
+        session = URLSession(configuration: config, delegate: self, delegateQueue: nil)
+    }
+
+    func startDownload(from url: URL) {
+        guard activeDownloads[url] == nil else { return }
+        let task = session.downloadTask(with: url)
+        activeDownloads[url] = task
+        task.resume()
+    }
+
+    func pauseDownload(for url: URL) {
+        guard let task = activeDownloads[url] else { return }
+        task.cancel(byProducingResumeData: { resumeData in
+            // Store resumeData if needed
+        })
+        activeDownloads.removeValue(forKey: url)
+    }
+
+    func resumeDownload(with resumeData: Data, for url: URL) {
+        let task = session.downloadTask(withResumeData: resumeData)
+        activeDownloads[url] = task
+        task.resume()
+    }
+
+    // MARK: - URLSessionDownloadDelegate
+
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        let fileManager = FileManager.default
+        let documents = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let destinationURL = documents.appendingPathComponent(downloadTask.originalRequest?.url?.lastPathComponent ?? "file.pdf")
+
+        do {
+            if fileManager.fileExists(atPath: destinationURL.path) {
+                try fileManager.removeItem(at: destinationURL)
+            }
+            try fileManager.moveItem(at: location, to: destinationURL)
+            print("✅ File saved to: \(destinationURL.path)")
+        } catch {
+            print("❌ File move error: \(error.localizedDescription)")
+        }
+
+        activeDownloads.removeValue(forKey: downloadTask.originalRequest!.url!)
+    }
+
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        if let error = error {
+            print("❌ Download failed: \(error.localizedDescription)")
+        }
+    }
+}
+
+```
 
 
 
