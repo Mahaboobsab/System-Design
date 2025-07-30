@@ -1,2 +1,35 @@
 # System-Design
-🎯 System Design Interview: File Downloader App (Mobile)
+🎯 System Design Interview: File Downloader App (Mobile)  
+
+**✅ Step 1: Clarify Requirements**  
+
+**Interviewer**:  
+
+**"Design a mobile app that downloads files. What are the core features you'd consider?"**  
+
+
+**You**:
+**"Let me clarify a few things first:**  
+
+- What types of files are we downloading (PDFs, videos, images)?  
+- Should downloads support pause/resume?  
+- Do we need background download support?  
+- Is there a limit on file size or number of concurrent downloads?  
+- Should we support offline access and caching?"  
+
+**✅ Step 2: Define Functional Requirements**  
+
+**You**:  
+
+**"Based on typical use cases, here are the functional requirements:**  
+
+
+- Download files from a given URL
+- Show download progress
+- Support pause/resume/cancel
+- Store files locally for offline access
+- Retry failed downloads
+- Notify user on completion
+  
+
+
