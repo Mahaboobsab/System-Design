@@ -66,7 +66,18 @@
 - Maintains a queue of DownloadTask objects  
 - Each task tracks URL, progress, status, and local file path  
 - Implements delegate methods to handle completion and errors  
-- Stores resume data for interrupted downloads"  
+- Stores resume data for interrupted downloads"
+
+**✅ Step 6: Edge Cases & Trade-offs**  
+
+**You**:  
+**"Some edge cases and trade-offs:**  
+
+- **Network failure**: Retry with exponential backoff  
+- **App termination**: Use resume data to continue downloads  
+- **Storage limits**: Warn user if disk space is low  
+- **Concurrency**: Limit to 3–5 parallel downloads to avoid overload"
+
 
 
   
