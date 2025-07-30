@@ -54,6 +54,19 @@
 - **Persistence**: Core Data or SQLite to track download metadata  
 - **Notification System**: Local notifications for completion alerts
 
+**✅ Step 5: Component Design**  
+
+**Interviewer**:
+"How would you implement the download manager?"
+
+**You**:
+**"I’d create a singleton DownloadManager class:**  
+
+- Uses URLSession(configuration: .background) for background downloads  
+- Maintains a queue of DownloadTask objects  
+- Each task tracks URL, progress, status, and local file path  
+- Implements delegate methods to handle completion and errors  
+- Stores resume data for interrupted downloads"  
 
 
   
