@@ -163,7 +163,21 @@ class DownloadManager: NSObject, URLSessionDownloadDelegate {
 }
 
 ```
+**✅ When to Write Only DownloadManager**  
 
+**You can focus just on DownloadManager if:**  
+
+- You're asked to implement core download logic  
+- The interviewer wants to test your networking and concurrency skills  
+- You're integrating it into an existing app
+
+**🧱 When to Build the Full System**  
+
+**You should build the full system if:**  
+
+- You're designing a complete file downloader app  
+- You need to show UI integration, progress tracking, and file management  
+- You're preparing for a system design interview that expects end-to-end thinking 
 
 
   
