@@ -11,11 +11,70 @@ Step 1: Below is the final designs
 |----------------------------------------------------------------------------------|----------------------------------------------------------------------|------------------------------------------------------------------------|
 | <img width="167" height="341" alt="Restaurant List" src="https://github.com/user-attachments/assets/ad19b971-b373-4297-bd15-996d67fcfc2e" /> | <img width="167" height="341" alt="Menu" src="https://github.com/user-attachments/assets/4a1b2dc2-3928-4224-b342-3eead7f355e5" /> | <img width="167" height="341" alt="Basket" src="https://github.com/user-attachments/assets/13355850-399a-4ae2-8e2e-30f2ac5bbc22" /> |  
 
-
-
-
 <img width="600" height="300" alt="Screenshot 2025-11-04 at 8 47 08 PM" src="https://github.com/user-attachments/assets/0c1d5a96-1f44-40fd-a15a-103b2a98ce8d" />
 
+### 📋 Requirements
+
+#### ✅ Features
+- Choose an address  
+- View a restaurant list  
+- See a restaurant menu  
+- Add dishes to the basket  
+- Make an order  
+- Track order status  
+- Track order on a map  
+- Ignore payments  
+
+#### ⚙️ Non-functional
+- Reasonable app performance  
+- Optimize for slow internet  
+- Optimize for limited storage on device  
+- Don't overload backend
+
+
+#### Data Model  
+
+~~~swift
+import Foundation
+
+// MARK: - Dish
+struct Dish: Identifiable, Codable {
+    let dishID: Int
+    let restaurantID: Int
+    let name: String
+    let price: Double
+    let imageURL: String
+
+    var id: Int { dishID }
+}
+
+// MARK: - Basket
+struct Basket: Identifiable, Codable {
+    let basketID: Int
+    let userID: Int
+    let restaurantID: Int
+    let selectedDishes: [SelectedDish]
+
+    var id: Int { basketID }
+}
+
+// Helper model for selected dishes
+struct SelectedDish: Codable {
+    let dishID: Int
+    let count: Int
+}
+
+// MARK: - Order
+struct Order: Identifiable, Codable {
+    let orderID: Int
+    let status: String
+    let basket: Basket
+    let courierLatitude: Double
+    let courierLongitude: Double
+
+    var id: Int { orderID }
+}
+~~~
 
 
 
