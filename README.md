@@ -2,18 +2,20 @@
 ## System Design  
 
 
-# 🍽 Uber Eats System Design  
+# Example 1:  🍽 Uber Eats System Design  
 
 
-Step 1: Below is the final designs  
+### Step 1: Below is the final designs  
 
 | Restaurant List                                                                 | Menu                                                                 | Basket                                                                 |
 |----------------------------------------------------------------------------------|----------------------------------------------------------------------|------------------------------------------------------------------------|
 | <img width="167" height="341" alt="Restaurant List" src="https://github.com/user-attachments/assets/ad19b971-b373-4297-bd15-996d67fcfc2e" /> | <img width="167" height="341" alt="Menu" src="https://github.com/user-attachments/assets/4a1b2dc2-3928-4224-b342-3eead7f355e5" /> | <img width="167" height="341" alt="Basket" src="https://github.com/user-attachments/assets/13355850-399a-4ae2-8e2e-30f2ac5bbc22" /> |  
 
+### Step 2: Problem Description  
+
 <img width="600" height="300" alt="Screenshot 2025-11-04 at 8 47 08 PM" src="https://github.com/user-attachments/assets/0c1d5a96-1f44-40fd-a15a-103b2a98ce8d" />
 
-### 📋 Requirements
+###  Step 3: 📋 Requirements
 
 #### ✅ Features
 - Choose an address  
@@ -32,7 +34,7 @@ Step 1: Below is the final designs
 - Don't overload backend
 
 
-#### Data Model  
+### Step 4: Data Model  
 
 ~~~swift
 import Foundation
@@ -76,13 +78,128 @@ struct Order: Identifiable, Codable {
 }
 ~~~
 
+### Step 5: REST API
+
+**Restaurants & Dishes**  
+
+- GET /users/<userID> Returns: User  
+
+- GET /restaurants/<addressID> Returns: [Restaurant]  
+
+- GET /dishes/<restaurantID> Returns: [Dish]  
+
+**Basket**  
+
+- POST /basket/{userID, restaurantID, dishID, count} Returns: Basket  
+
+- PATCH /basket/{basketID, dishID, count} Returns: Basket  
+
+- GET /basket/{basketID} Returns: Basket
+
+**Orders**  
+
+- POST /orders/{userID, basketID} Returns: Order  
+
+- GET /orders/{orderID} Returns: Order  
+
+**SSE (Server Sent Events)**  
+
+- GET /live-order-status/{orderID} Returns: event stream
+
+### Step 6: Storage
+
+Metadata  
+
+Core Data  
+Realm DB  
+Serialize objects  
+
+### Step 7: High Level Design  
+
+
+
+<img width="994" height="647" alt="Screenshot 2025-11-04 at 10 06 08 PM" src="https://github.com/user-attachments/assets/cd22d377-3e55-47ef-933b-57dd5433ca87" />  
+
+
+### Step 8: Create SOLID Principles  
+
+~~~swift
+import Foundation
+
+// MARK: - Error Type
+enum UberError: Error {
+    case networkError(Error)
+    case decodingError(Error)
+    case invalidResponse
+}
+
+// MARK: - Restaurant Model
+struct Restaurant: Codable, Identifiable {
+    let restaurantID: Int
+    let name: String
+    let rating: Int
+    let imageURL: String
+    let address: Address
+
+    var id: Int { restaurantID }
+}
+
+struct Address: Codable {
+    let addressID: Int
+    let label: String
+    let city: String
+    let street: String
+    let flat: String
+    let postcode: String
+    let latitude: Double
+    let longitude: Double
+}
+
+// MARK: - Protocol Definition
+protocol RestaurantService {
+    func getRestaurants(addressID: Int,
+                        completion: @escaping (Result<[Restaurant], UberError>) -> Void)
+}
+
+// MARK: - Implementation
+class RestaurantServiceImpl: RestaurantService {
+    func getRestaurants(addressID: Int,
+                        completion: @escaping (Result<[Restaurant], UberError>) -> Void) {
+        let urlString = "https://api.example.com/restaurants/\(addressID)"
+        guard let url = URL(string: urlString) else {
+            completion(.failure(.invalidResponse))
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(.failure(.networkError(error)))
+                return
+            }
+
+            guard let data = data else {
+                completion(.failure(.invalidResponse))
+                return
+            }
+
+            do {
+                let restaurants = try JSONDecoder().decode([Restaurant].self, from: data)
+                completion(.success(restaurants))
+            } catch {
+                completion(.failure(.decodingError(error)))
+            }
+        }.resume()
+    }
+}
+~~~
 
 
 
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-🎯 System Design Interview: File Downloader App (Mobile)  
+# Example 2:  🎯 System Design Interview: File Downloader App (Mobile)  
 
 ---
 
