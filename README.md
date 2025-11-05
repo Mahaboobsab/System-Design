@@ -1,4 +1,28 @@
-# System-Design
+
+## System Design  
+
+
+# 🍽 Uber Eats System Design  
+
+
+Step 1: Below is the final designs  
+
+| Restaurant List                                                                 | Menu                                                                 | Basket                                                                 |
+|----------------------------------------------------------------------------------|----------------------------------------------------------------------|------------------------------------------------------------------------|
+| <img width="167" height="341" alt="Restaurant List" src="https://github.com/user-attachments/assets/ad19b971-b373-4297-bd15-996d67fcfc2e" /> | <img width="167" height="341" alt="Menu" src="https://github.com/user-attachments/assets/4a1b2dc2-3928-4224-b342-3eead7f355e5" /> | <img width="167" height="341" alt="Basket" src="https://github.com/user-attachments/assets/13355850-399a-4ae2-8e2e-30f2ac5bbc22" /> |  
+
+
+
+
+<img width="600" height="300" alt="Screenshot 2025-11-04 at 8 47 08 PM" src="https://github.com/user-attachments/assets/0c1d5a96-1f44-40fd-a15a-103b2a98ce8d" />
+
+
+
+
+
+
+
+
 🎯 System Design Interview: File Downloader App (Mobile)  
 
 ---
