@@ -110,9 +110,9 @@ struct Order: Identifiable, Codable {
 
 Metadata  
 
-Core Data  
-Realm DB  
-Serialize objects  
+- Core Data  
+- Realm DB  
+- Serialize objects  
 
 ### Step 7: High Level Design  
 
